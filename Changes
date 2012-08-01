@@ -1,0 +1,38 @@
+Revision history for Perinci-Access-Simple-Server
+
+0.05    2012-08-01 (SHARYANTO)
+
+        - Rename dist from Perinci-Access-TCP-Client to
+          Perinci-Access-Simple-Client, following spec name change (Riap::TCP ->
+          Riap::Simple). Now follows Riap 1.1.17.
+
+        - Rename module from Perinci::Access::TCP::Client to
+          Perinci::Access::Simple::Server::Socket.
+
+        - Add Perinci::Access::Simple::Server::Pipe.
+
+
+0.04    2012-07-25 (SHARYANTO)
+
+        Fix: don't mix buffered and unbuffered I/O, use unbuffered.
+
+
+0.03    2012-07-20 (SHARYANTO)
+
+        No functional changes. Add missing deps [CT].
+
+
+0.02    2012-07-19 (SHARYANTO)
+
+        [ENHANCEMENTS]
+
+        - peri-tcpserve: Add option --nofork (for debugging)
+
+        [BUG FIXES]
+
+        - Don't mix buffered and unbuffered write.
+
+
+0.01    2012-07-19 (SHARYANTO)
+
+        First release, proof of concept.
