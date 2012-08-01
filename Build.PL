@@ -20,7 +20,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Server",
-  "dist_version" => "0.06",
+  "dist_version" => "0.07",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Server",
   "recommends" => {},
@@ -34,6 +34,7 @@ my %module_build_args = (
     "Log::Any::App" => 0,
     "Moo" => 0,
     "Perinci::Access" => 0,
+    "Perinci::Gen::ForModule" => 0,
     "Perinci::Sub::Wrapper" => "0.23",
     "Perinci::Sub::property::result_postfilter" => 0,
     "Perinci::Sub::property::timeout" => 0,

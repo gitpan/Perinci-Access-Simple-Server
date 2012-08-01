@@ -25,6 +25,7 @@ requires:
   Log::Any::App: 0
   Moo: 0
   Perinci::Access: 0
+  Perinci::Gen::ForModule: 0
   Perinci::Sub::Wrapper: 0.23
   Perinci::Sub::property::result_postfilter: 0
   Perinci::Sub::property::timeout: 0
@@ -35,4 +36,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Access-Simple-Server
   repository: http://github.com/sharyanto/perl-Perinci-Access-Simple-Server
-version: 0.06
+version: 0.07
