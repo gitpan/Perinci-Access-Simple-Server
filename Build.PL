@@ -8,6 +8,8 @@ use Module::Build 0.3601;
 my %module_build_args = (
   "build_requires" => {
     "Module::Build" => "0.3601",
+    "Perinci::Access::Simple::Client" => "0.05",
+    "Perinci::Examples" => "0.10",
     "Test::More" => "0.96"
   },
   "configure_requires" => {
@@ -18,7 +20,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Server",
-  "dist_version" => "0.05",
+  "dist_version" => "0.06",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Server",
   "recommends" => {},
@@ -29,6 +31,7 @@ my %module_build_args = (
     "IO::Handle::Record" => 0,
     "JSON" => 0,
     "Log::Any" => 0,
+    "Log::Any::App" => 0,
     "Moo" => 0,
     "Perinci::Access" => 0,
     "Perinci::Sub::Wrapper" => "0.23",

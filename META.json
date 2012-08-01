@@ -31,6 +31,7 @@
             "IO::Handle::Record" : 0,
             "JSON" : 0,
             "Log::Any" : 0,
+            "Log::Any::App" : 0,
             "Moo" : 0,
             "Perinci::Access" : 0,
             "Perinci::Sub::Wrapper" : "0.23",
@@ -44,6 +45,8 @@
       },
       "test" : {
          "requires" : {
+            "Perinci::Access::Simple::Client" : "0.05",
+            "Perinci::Examples" : "0.10",
             "Test::More" : "0.96"
          }
       }
@@ -55,6 +58,6 @@
          "url" : "http://github.com/sharyanto/perl-Perinci-Access-Simple-Server"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }
 

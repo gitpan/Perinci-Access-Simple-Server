@@ -12,5 +12,6 @@ dist.ini
 lib/Perinci/Access/Simple/Server/Pipe.pm
 lib/Perinci/Access/Simple/Server/Socket.pm
 t/00-compile.t
+t/pipe.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
