@@ -20,13 +20,14 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Server",
-  "dist_version" => "0.07",
+  "dist_version" => "0.08",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Server",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Class::XSAccessor" => 0,
+    "Data::Clean::JSON" => 0,
     "File::HomeDir" => 0,
     "IO::Handle::Record" => 0,
     "JSON" => 0,
@@ -36,7 +37,6 @@ my %module_build_args = (
     "Perinci::Access" => 0,
     "Perinci::Gen::ForModule" => 0,
     "Perinci::Sub::Wrapper" => "0.23",
-    "Perinci::Sub::property::result_postfilter" => 0,
     "Perinci::Sub::property::timeout" => 0,
     "Riap" => "1.1.14",
     "SHARYANTO::Proc::Daemon::Prefork" => "0.05",

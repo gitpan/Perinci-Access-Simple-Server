@@ -5,8 +5,9 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
+use Data::Clean::JSON;
 use File::HomeDir;
 use IO::Handle::Record; # to get peercred() in IO::Socket::UNIX
 use IO::Select;
@@ -20,6 +21,8 @@ use Time::HiRes qw(gettimeofday tv_interval);
 use URI::Escape;
 
 use Moo;
+
+our $cleaner = Data::Clean::JSON->new;
 
 has name                   => (
     is => 'rw',
@@ -51,11 +54,6 @@ has _pa                    => (             # Perinci::Access object
                 pl => Perinci::Access::InProcess->new(
                     load => 0,
                     extra_wrapper_convert => {
-                        result_postfilter => {
-                            re   => 'str',
-                            date => 'epoch',
-                            code => 'str',
-                        },
                         #timeout => 300,
                     },
                     #use_tx            => $self->{use_tx},
@@ -243,14 +241,19 @@ sub _main_loop {
                     #$log->tracef("buf=%s (%d bytes)", $buf, length($buf));
                     if ($buf =~ /\Aj(.*)\015?\012/) {
                         $self->{_req_json} = $1;
+                        $log->tracef("Received JSON from client: %s",
+                                     $self->{_req_json});
                         $buf = substr($buf, 1+length($1));
                         last READ_REQ;
                     } elsif ($buf =~ /\AJ(\d+)(\015?\012)(.+)\015?\012/s
                                  && length($3) >= $1) {
                         $self->{_req_json} = substr($3, 0, $1);
+                        $log->tracef("Received JSON from client: %s",
+                                     $self->{_req_json});
                         $buf = substr($buf, 1+length($1)+length($2)+length($3));
                         last READ_REQ;
-                    } elsif ($buf =~ /\A[^jJ].*/) {
+                    } elsif ($buf =~ /\A([^jJ].*)/) {
+                        $log->tracef("Received from client: %s", $1);
                         $self->{_finish_req_time} = [gettimeofday];
                         $self->{_res} = [400, "Invalid request line"];
                         $buf =~ s/\A.+//;
@@ -281,12 +284,12 @@ sub _main_loop {
 
               FINISH_REQ:
                 $self->_daemon->update_scoreboard({state => "W"});
-                my $res;
+                $cleaner->clean_in_place($self->{_res});
                 eval { $self->{_res_json} = $json->encode($self->{_res}) };
                 $e = $@;
                 if ($e) {
                     $self->{_res} = [500, "Can't encode result in JSON: $e"];
-                    $res = $json->encode($self->{_res});
+                    $self->{_res_json} = $json->encode($self->{_res});
                 }
                 $self->_write_sock($sock, "J" . length($self->{_res_json}).
                                        "\015\012");
@@ -480,7 +483,7 @@ Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over soc
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

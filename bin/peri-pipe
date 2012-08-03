@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any::App '$log';
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 
 use Perinci::Access::Simple::Server::Pipe;
 
@@ -25,7 +25,7 @@ peri-pipe - Default Riap::Simple server over pipe
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

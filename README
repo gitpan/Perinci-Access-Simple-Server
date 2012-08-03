@@ -3,7 +3,7 @@ NAME
     Riap::Simple server over pipe
 
 VERSION
-    version 0.07
+    version 0.08
 
 SYNOPSIS
     In "/path/to/your/program":
