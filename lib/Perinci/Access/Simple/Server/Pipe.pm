@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.08'; # VERSION
+our $VERSION = '0.09'; # VERSION
 
 use Data::Clean::JSON;
 use JSON;
@@ -23,7 +23,7 @@ has _pa => (             # Perinci::Access::InProcess object
     });
 
 my $json = JSON->new->allow_nonref;
-my $cleaner = Data::Clean::JSON->new;
+my $cleanser = Data::Clean::JSON->new;
 
 $|++;
 
@@ -41,7 +41,7 @@ sub send_response {
     my $self = shift;
     my $res = $self->res // [500, "BUG: Response not set"];
     $log->tracef("Sending response to stdout: %s", $res);
-    $cleaner->clean_in_place($res);
+    $cleanser->clean_in_place($res);
     my $res_json = $json->encode($res);
     print "J", length($res_json), "\015\012", $res_json, "\015\012";
 }
@@ -105,7 +105,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 

@@ -9,6 +9,7 @@ README
 bin/peri-pipe
 bin/peri-sockserve
 dist.ini
+lib/Perinci/Access/Simple/Server.pm
 lib/Perinci/Access/Simple/Server/Pipe.pm
 lib/Perinci/Access/Simple/Server/Socket.pm
 t/00-compile.t

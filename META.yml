@@ -1,5 +1,5 @@
 ---
-abstract: '(Base) class for creating Riap::Simple server over pipe'
+abstract: 'Riap::Simple server implementations'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
@@ -36,4 +36,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Access-Simple-Server
   repository: http://github.com/sharyanto/perl-Perinci-Access-Simple-Server
-version: 0.08
+version: 0.09

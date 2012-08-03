@@ -1,65 +1,13 @@
 NAME
-    Perinci::Access::Simple::Server::Pipe - (Base) class for creating
-    Riap::Simple server over pipe
+    Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 VERSION
-    version 0.08
-
-SYNOPSIS
-    In "/path/to/your/program":
-
-     #!/usr/bin/perl
-     package MyRiapServer;
-     use Moo;
-     extends 'Perinci::Access::Simple::Server::Pipe';
-
-     # override some methods ...
-
-     package main;
-     MyRiapServer->run;
-
-    Accessing the server via Perinci::Access:
-
-     % perl -MPerinci::Access -e'my $pa = Perinci::Access->new;
-       my $res = $pa->request(call => "riap+pipe:/path/to/your/prog////Foo/func");
-
-DESCRIPTION
-    This module is a class for creating Riap::Simple server over pipe. Riap
-    requests will be read from STDIN, and response sent to STDOUT.
-
-    By default, the handle() method processes the Riap request using
-    Perinci::Access::InProcess. You can customize this by overriding the
-    method. The Riap request is in "req". Method should set "res" to the
-    Riap response.
-
-    This module uses Log::Any for logging.
-
-    This module uses Moo for object system.
-
-ATTRIBUTES
-  req => HASH
-    The current Riap request.
-
-  res => HASH
-    The current Riap response.
-
-METHODS
-  run()
-    The main method. Will start a loop of reading request from STDIN and
-    sending response to STDOUT. Riap request will be put to "req" attribute.
-
-  handle()
-    The method that will be called by run() to set "res" attribute. By
-    default it will pass the request to Perinci::Access::InProcess. You can
-    override this method to provide custom behavior.
-
-  send_response()
-    The method that sends "res" to client (STDOUT).
+    version 0.09
 
 SEE ALSO
-    Riap::Simple, Riap, Rinci
+    Perinci::Access::Simple::Server::Pipe
 
-    Perinci::Access::Simple::Server::Socket.
+    Perinci::Access::Simple::Server::Socket
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>

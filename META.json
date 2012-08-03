@@ -1,5 +1,5 @@
 {
-   "abstract" : "(Base) class for creating Riap::Simple server over pipe",
+   "abstract" : "Riap::Simple server implementations",
    "author" : [
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
@@ -59,6 +59,6 @@
          "url" : "http://github.com/sharyanto/perl-Perinci-Access-Simple-Server"
       }
    },
-   "version" : "0.08"
+   "version" : "0.09"
 }
 

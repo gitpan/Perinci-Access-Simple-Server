@@ -15,12 +15,12 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.3601"
   },
-  "dist_abstract" => "(Base) class for creating Riap::Simple server over pipe",
+  "dist_abstract" => "Riap::Simple server implementations",
   "dist_author" => [
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Access-Simple-Server",
-  "dist_version" => "0.08",
+  "dist_version" => "0.09",
   "license" => "perl",
   "module_name" => "Perinci::Access::Simple::Server",
   "recommends" => {},
