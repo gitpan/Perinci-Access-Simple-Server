@@ -12,7 +12,7 @@ use Perinci::Access::Simple::Server::Socket;
 use Perinci::CmdLine ();
 use Perinci::Gen::ForModule qw(gen_meta_for_module);
 
-our $VERSION = '0.09'; # VERSION
+our $VERSION = '0.10'; # VERSION
 
 our %SPEC;
 
@@ -79,6 +79,13 @@ _
             schema => ['bool' => {default=>1}],
             summary => 'Set to false to disable forking',
         },
+        library => {
+            schema => ['array' => {
+                of => 'str*',
+            }],
+            summary => 'Add directory to library search path, a la Perl\'s -I',
+            cmdline_aliases => {I=>{}},
+        },
     },
 };
 sub serve {
@@ -92,6 +99,11 @@ sub serve {
 
     my $access_log_path = $args{access_log_path} //
         File::HomeDir->my_home . "/peri-sockserve-access.log";
+
+    for my $dir (@{ $args{library} // [] }) {
+        require lib;
+        lib->import($dir);
+    }
 
     my @modules;
     for my $m (@{$args{modules}}) {
@@ -139,7 +151,7 @@ peri-sockserve - Serve Perl modules using the Riap::Simple protocol over sockets
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
