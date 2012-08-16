@@ -4,13 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.11'; # VERSION
-
-if ($ENV{AUTOMATIC_TESTING}) {
-    warn "AUTOMATIC_TESTING is set to true. To avoid failing CPAN Testers ".
-        "report, this script refuses to run under that env.\n";
-    exit 0;
-}
+our $VERSION = '0.12'; # VERSION
 
 require Perinci::Access::Simple::Server::Pipe;
 require Log::Any::App;
@@ -32,7 +26,7 @@ peri-pipe - Default Riap::Simple server over pipe
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
