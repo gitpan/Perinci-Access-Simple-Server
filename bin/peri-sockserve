@@ -12,7 +12,7 @@ use Perinci::Access::Simple::Server::Socket;
 use Perinci::CmdLine ();
 use Perinci::Gen::ForModule qw(gen_meta_for_module);
 
-our $VERSION = '0.12'; # VERSION
+our $VERSION = '0.13'; # VERSION
 
 our %SPEC;
 
@@ -27,7 +27,7 @@ TCP or Unix socket, using the Riap::Simple protocol. First the specified Perl
 modules will be loaded. Modules which do not contain Rinci metadata will be
 equipped with metadata using Perinci::Sub::Gen::ForModule. Perl modules not
 specified in the command-line arguments will not be accessible, since
-Perinci::Access::InProcess is used with load=>0.
+Perinci::Access::Perl is used with load=>0.
 
 Modules can be accessed with Riap clients such as Perinci::Access using URL:
 
@@ -141,8 +141,8 @@ Perinci::CmdLine->new(url => '/main/serve')->run;
 #ABSTRACT: Serve Perl modules using the Riap::Simple protocol over sockets
 #PODNAME: peri-sockserve
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -151,7 +151,7 @@ peri-sockserve - Serve Perl modules using the Riap::Simple protocol over sockets
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -180,10 +180,9 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

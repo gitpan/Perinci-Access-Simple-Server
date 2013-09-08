@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.12'; # VERSION
+our $VERSION = '0.13'; # VERSION
 
 require Perinci::Access::Simple::Server::Pipe;
 require Log::Any::App;
@@ -16,8 +16,8 @@ Perinci::Access::Simple::Server::Pipe->new->run;
 #ABSTRACT: Default Riap::Simple server over pipe
 #PODNAME: peri-pipe
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -26,7 +26,7 @@ peri-pipe - Default Riap::Simple server over pipe
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -46,10 +46,9 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

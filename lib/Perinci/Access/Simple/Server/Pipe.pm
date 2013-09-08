@@ -1,11 +1,11 @@
 package Perinci::Access::Simple::Server::Pipe;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.12'; # VERSION
+our $VERSION = '0.13'; # VERSION
 
 use Data::Clean::JSON;
 use JSON;
@@ -14,12 +14,12 @@ use Moo;
 
 has req => (is => 'rw'); # current Riap request
 has res => (is => 'rw'); # current Riap response
-has _pa => (             # Perinci::Access::InProcess object
+has _pa => (
     is => 'rw',
     lazy => 1,
     default => sub {
-        require Perinci::Access::InProcess;
-        Perinci::Access::InProcess->new();
+        require Perinci::Access::Schemeless;
+        Perinci::Access::Schemeless->new();
     });
 
 my $json = JSON->new->allow_nonref;
@@ -95,8 +95,8 @@ sub run {
 1;
 # ABSTRACT: (Base) class for creating Riap::Simple server over pipe
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -105,7 +105,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -132,7 +132,7 @@ This module is a class for creating L<Riap::Simple> server over pipe. Riap
 requests will be read from STDIN, and response sent to STDOUT.
 
 By default, the L<handle()> method processes the Riap request using
-L<Perinci::Access::InProcess>. You can customize this by overriding the method.
+L<Perinci::Access::Schemeless>. You can customize this by overriding the method.
 The Riap request is in C<req>. Method should set C<res> to the Riap response.
 
 This module uses L<Log::Any> for logging.
@@ -161,7 +161,7 @@ response to STDOUT. Riap request will be put to C<req> attribute.
 =head2 handle()
 
 The method that will be called by run() to set C<res> attribute. By default it
-will pass the request to L<Perinci::Access::InProcess>. You can override this
+will pass the request to L<Perinci::Access::Schemeless>. You can override this
 method to provide custom behavior.
 
 =head2 send_response()
@@ -180,10 +180,9 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

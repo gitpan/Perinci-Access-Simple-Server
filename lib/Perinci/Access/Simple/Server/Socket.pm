@@ -1,11 +1,11 @@
 package Perinci::Access::Simple::Server::Socket;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.12'; # VERSION
+our $VERSION = '0.13'; # VERSION
 
 use Data::Clean::JSON;
 use File::HomeDir;
@@ -32,7 +32,6 @@ has name                   => (
         $name;
     });
 has daemonize              => (is => 'rw', default=>sub{0});
-has sock_path              => (is => 'rw');
 has pid_path               => (is => 'rw');
 has scoreboard_path        => (is => 'rw');
 has error_log_path         => (is => 'rw');
@@ -49,9 +48,19 @@ has _server_socks          => (is => 'rw'); # store server sockets
 has _pa                    => (             # Perinci::Access object
     is => 'rw',
     default => sub {
+        require Perinci::Access::Perl;
+        require Perinci::Access::Schemeless;
         Perinci::Access->new(
             handlers => {
-                pl => Perinci::Access::InProcess->new(
+                pl => Perinci::Access::Perl->new(
+                    load => 0,
+                    extra_wrapper_convert => {
+                        #timeout => 300,
+                    },
+                    #use_tx            => $self->{use_tx},
+                    #custom_tx_manager => $self->{custom_tx_manager},
+                ),
+                '' => Perinci::Access::Schemeless->new(
                     load => 0,
                     extra_wrapper_convert => {
                         #timeout => 300,
@@ -473,8 +482,8 @@ sub access_log {
 1;
 # ABSTRACT: Implement Riap::Simple server over sockets
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -483,7 +492,7 @@ Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over soc
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -642,10 +651,9 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
