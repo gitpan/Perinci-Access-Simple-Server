@@ -12,7 +12,7 @@ use Perinci::Access::Simple::Server::Socket;
 use Perinci::CmdLine ();
 use Perinci::Gen::ForModule qw(gen_meta_for_module);
 
-our $VERSION = '0.13'; # VERSION
+our $VERSION = '0.14'; # VERSION
 
 our %SPEC;
 
@@ -151,7 +151,7 @@ peri-sockserve - Serve Perl modules using the Riap::Simple protocol over sockets
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 

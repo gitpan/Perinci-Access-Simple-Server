@@ -1,46 +1,88 @@
 use strict;
 use warnings;
 
-# This test was generated via Dist::Zilla::Plugin::Test::Compile 2.018
+# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.033
 
-use Test::More 0.88;
+use Test::More  tests => 5 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
-use Capture::Tiny qw{ capture };
-
-my @module_files = qw(
-Perinci/Access/Simple/Server.pm
-Perinci/Access/Simple/Server/Pipe.pm
-Perinci/Access/Simple/Server/Socket.pm
+my @module_files = (
+    'Perinci/Access/Simple/Server.pm',
+    'Perinci/Access/Simple/Server/Pipe.pm',
+    'Perinci/Access/Simple/Server/Socket.pm'
 );
 
-my @scripts = qw(
-bin/peri-pipe
-bin/peri-sockserve
+my @scripts = (
+    'bin/peri-pipe',
+    'bin/peri-sockserve'
 );
 
 # no fake home requested
 
+use File::Spec;
+use IPC::Open3;
+use IO::Handle;
+
 my @warnings;
 for my $lib (@module_files)
 {
-    my ($stdout, $stderr, $exit) = capture {
-        system($^X, '-Mblib', '-e', qq{require q[$lib]});
-    };
-    is($?, 0, "$lib loaded ok");
-    warn $stderr if $stderr;
-    push @warnings, $stderr if $stderr;
+    # see L<perlfaq8/How can I capture STDERR from an external command?>
+    open my $stdin, '<', File::Spec->devnull or die "can't open devnull: $!";
+    my $stderr = IO::Handle->new;
+
+    my $pid = open3($stdin, '>&STDERR', $stderr, $^X, '-Mblib', '-e', "require q[$lib]");
+    binmode $stderr, ':crlf' if $^O eq 'MSWin32';
+    my @_warnings = <$stderr>;
+    waitpid($pid, 0);
+    is($? >> 8, 0, "$lib loaded ok");
+
+    if (@_warnings)
+    {
+        warn @_warnings;
+        push @warnings, @_warnings;
+    }
 }
 
-use Test::Script 1.05;
-foreach my $file ( @scripts ) {
-    script_compiles( $file, "$file compiles" );
+foreach my $file (@scripts)
+{ SKIP: {
+    open my $fh, '<', $file or warn("Unable to open $file: $!"), next;
+    my $line = <$fh>;
+    close $fh and skip("$file isn't perl", 1) unless $line =~ /^#!.*?\bperl\b\s*(.*)$/;
+
+    my @flags = $1 ? split(/\s+/, $1) : ();
+
+    open my $stdin, '<', File::Spec->devnull or die "can't open devnull: $!";
+    my $stderr = IO::Handle->new;
+
+    my $pid = open3($stdin, '>&STDERR', $stderr, $^X, '-Mblib', @flags, '-c', $file);
+    binmode $stderr, ':crlf' if $^O eq 'MSWin32';
+    my @_warnings = <$stderr>;
+    waitpid($pid, 0);
+    is($? >> 8, 0, "$file compiled ok");
+
+   # in older perls, -c output is simply the file portion of the path being tested
+    if (@_warnings = grep { !/\bsyntax OK$/ }
+        grep { chomp; $_ ne (File::Spec->splitpath($file))[2] } @_warnings)
+    {
+        # temporary measure - win32 newline issues?
+        warn map { _show_whitespace($_) } @_warnings;
+        push @warnings, @_warnings;
+    }
+} }
+
+sub _show_whitespace
+{
+    my $string = shift;
+    $string =~ s/\012/[\\012]/g;
+    $string =~ s/\015/[\\015]/g;
+    $string =~ s/\t/[\\t]/g;
+    $string =~ s/ /[\\s]/g;
+    return $string;
 }
+
 
 
 is(scalar(@warnings), 0, 'no warnings found') if $ENV{AUTHOR_TESTING};
 
 
-
-done_testing;

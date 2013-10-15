@@ -2,7 +2,7 @@ NAME
     Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 VERSION
-    version 0.13
+    version 0.14
 
 SEE ALSO
     Perinci::Access::Simple::Server::Pipe

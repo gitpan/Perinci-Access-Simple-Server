@@ -1,6 +1,6 @@
 package Perinci::Access::Simple::Server;
 
-our $VERSION = '0.13'; # VERSION
+our $VERSION = '0.14'; # VERSION
 
 1;
 # ABSTRACT: Riap::Simple server implementations
@@ -15,7 +15,7 @@ Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SEE ALSO
 

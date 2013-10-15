@@ -3,15 +3,14 @@ abstract: 'Riap::Simple server implementations'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
-  Capture::Tiny: 0
-  Module::Build: 0.3601
+  File::Spec: 0
+  IO::Handle: 0
+  IPC::Open3: 0
   Perinci::Access::Simple::Client: 0.05
   Perinci::Examples: 0.10
   Test::More: 0.96
-  Test::Script: 1.05
-  blib: 0
 configure_requires:
-  Module::Build: 0.3601
+  ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140'
 license: perl
@@ -21,7 +20,8 @@ meta-spec:
 name: Perinci-Access-Simple-Server
 requires:
   Class::XSAccessor: 0
-  Data::Clean::JSON: 0
+  Data::Clean::FromJSON: 0.11
+  Data::Clean::JSON: 0.11
   File::HomeDir: 0
   IO::Handle::Record: 0
   JSON: 0
@@ -41,4 +41,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Access-Simple-Server
   repository: http://github.com/sharyanto/perl-Perinci-Access-Simple-Server
-version: 0.13
+version: 0.14
