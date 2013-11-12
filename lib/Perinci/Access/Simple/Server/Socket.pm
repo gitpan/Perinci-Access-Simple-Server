@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.14'; # VERSION
+our $VERSION = '0.15'; # VERSION
 
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
@@ -491,13 +491,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over sockets
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -525,6 +527,11 @@ preforking, multiple interface and Unix sockets.
 This module uses L<Log::Any> for logging.
 
 This module uses L<Moo> for object system.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =head1 ATTRIBUTES
 
@@ -649,6 +656,22 @@ L<Riap::Simple>, L<Riap>, L<Rinci>
 L<peri-sockserve>, simple command-line interface for this module.
 
 L<Perinci::Access::Simple::Client>, L<Perinci::Access>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Access-Simple-Server>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-Perinci-Access-Simple-Server>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Access-Simple-Server>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 =head1 AUTHOR
 

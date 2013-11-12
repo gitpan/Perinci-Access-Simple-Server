@@ -8,6 +8,7 @@ Makefile.PL
 README
 bin/peri-pipe
 bin/peri-sockserve
+build.log
 dist.ini
 lib/Perinci/Access/Simple/Server.pm
 lib/Perinci/Access/Simple/Server/Pipe.pm
@@ -17,3 +18,4 @@ t/pipe.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/release-rinci.t
+weaver.ini
