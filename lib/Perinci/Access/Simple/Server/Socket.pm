@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.16'; # VERSION
+our $VERSION = '0.17'; # VERSION
 
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
@@ -47,7 +47,7 @@ has start_servers          => (is => 'rw', default => sub{3});
 has max_requests_per_child => (is => 'rw', default=>sub{1000});
 has _daemon                => (is => 'rw'); # SHARYANTO::Proc::Daemon::Prefork
 has _server_socks          => (is => 'rw'); # store server sockets
-has _pa                    => (             # Perinci::Access object
+has riap_client            => (             # Perinci::Access object
     is => 'rw',
     default => sub {
         require Perinci::Access::Perl;
@@ -291,7 +291,7 @@ sub _main_loop {
 
               RES:
                 $self->{_start_res_time}  = [gettimeofday];
-                $self->{_res} = $self->_pa->request(
+                $self->{_res} = $self->riap_client->request(
                     $self->{_req}{action} => $self->{_req}{uri},
                     $self->{_req});
                 $self->{_finish_res_time} = [gettimeofday];
@@ -499,7 +499,7 @@ Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over soc
 
 =head1 VERSION
 
-This document describes version 0.16 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-04-30.
+This document describes version 0.17 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
 
 =head1 SYNOPSIS
 
@@ -537,6 +537,10 @@ Name of server, for display in process table ('ps ax').
 =head2 daemonize => BOOL (default 0)
 
 Whether to daemonize (go into background).
+
+=head2 riap_client => OBJ
+
+L<Perinci::Access> (or compatible) instance.
 
 =head2 ports => ARRAY OF STR (default [])
 

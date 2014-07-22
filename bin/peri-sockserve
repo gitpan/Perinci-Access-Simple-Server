@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!perl
 
 use 5.010;
 use strict;
@@ -9,10 +9,10 @@ use File::HomeDir;
 use Module::List qw(list_modules);
 use Module::Load;
 use Perinci::Access::Simple::Server::Socket;
-use Perinci::CmdLine ();
+use Perinci::CmdLine::Any;
 use Perinci::Gen::ForModule qw(gen_meta_for_module);
 
-our $VERSION = '0.16'; # VERSION
+our $VERSION = '0.17'; # VERSION
 
 our %SPEC;
 
@@ -135,7 +135,7 @@ sub serve {
     [200, "OK"];
 }
 
-Perinci::CmdLine->new(url => '/main/serve')->run;
+Perinci::CmdLine::Any->new(url => '/main/serve')->run;
 
 1;
 #ABSTRACT: Serve Perl modules using the Riap::Simple protocol over sockets
@@ -153,7 +153,7 @@ peri-sockserve - Serve Perl modules using the Riap::Simple protocol over sockets
 
 =head1 VERSION
 
-This document describes version 0.16 of peri-sockserve (from Perl distribution Perinci-Access-Simple-Server), released on 2014-04-30.
+This document describes version 0.17 of peri-sockserve (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
 
 =head1 SYNOPSIS
 

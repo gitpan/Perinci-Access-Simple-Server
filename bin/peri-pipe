@@ -1,10 +1,10 @@
-#!/usr/bin/perl
+#!perl
 
 use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '0.16'; # VERSION
+our $VERSION = '0.17'; # VERSION
 
 require Perinci::Access::Simple::Server::Pipe;
 require Log::Any::App;
@@ -28,7 +28,7 @@ peri-pipe - Default Riap::Simple server over pipe
 
 =head1 VERSION
 
-This document describes version 0.16 of peri-pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-04-30.
+This document describes version 0.17 of peri-pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
 
 =head1 SYNOPSIS
 

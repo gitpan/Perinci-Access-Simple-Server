@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.16'; # VERSION
+our $VERSION = '0.17'; # VERSION
 
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
@@ -15,7 +15,7 @@ use Moo;
 
 has req => (is => 'rw'); # current Riap request
 has res => (is => 'rw'); # current Riap response
-has _pa => (
+has riap_client => (
     is => 'rw',
     lazy => 1,
     default => sub {
@@ -35,7 +35,7 @@ sub handle {
     my ($self) = @_;
     my $req = $self->req;
 
-    my $res = $self->_pa->request($req->{action} => $req->{uri}, $req);
+    my $res = $self->riap_client->request($req->{action} => $req->{uri}, $req);
     $self->res($res);
 }
 
@@ -112,7 +112,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-This document describes version 0.16 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-04-30.
+This document describes version 0.17 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
 
 =head1 SYNOPSIS
 
