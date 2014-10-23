@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.17'; # VERSION
+our $VERSION = '0.18'; # VERSION
 
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
@@ -17,6 +17,7 @@ use IO::Socket::INET;
 use IO::Socket::UNIX;
 use JSON;
 use Perinci::Access;
+use Perinci::AccessUtil qw(insert_riap_stuffs_to_res decode_args_in_riap_req);
 use SHARYANTO::Proc::Daemon::Prefork;
 use Time::HiRes qw(gettimeofday tv_interval);
 use URI::Escape;
@@ -278,6 +279,7 @@ sub _main_loop {
                 eval {
                     $self->{_req} = $json->decode($self->{_req_json});
                     $cleanserfj->clean_in_place($self->{_req});
+                    decode_args_in_riap_req($self->{_req});
                 };
                 my $e = $@;
                 if ($e) {
@@ -298,6 +300,7 @@ sub _main_loop {
 
               FINISH_REQ:
                 $self->_daemon->update_scoreboard({state => "W"});
+                insert_riap_stuffs_to_res($self->{_res}, $self->{_req}{v});
                 $cleanser->clean_in_place($self->{_res});
                 eval { $self->{_res_json} = $json->encode($self->{_res}) };
                 $e = $@;
@@ -499,7 +502,7 @@ Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over soc
 
 =head1 VERSION
 
-This document describes version 0.17 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
+This document describes version 0.18 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-10-23.
 
 =head1 SYNOPSIS
 
@@ -662,7 +665,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Ac
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Access-Simple-Server>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Access-Simple-Server>.
 
 =head1 BUGS
 
@@ -674,11 +677,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

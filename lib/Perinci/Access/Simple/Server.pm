@@ -1,6 +1,6 @@
 package Perinci::Access::Simple::Server;
 
-our $VERSION = '0.17'; # VERSION
+our $VERSION = '0.18'; # VERSION
 
 1;
 # ABSTRACT: Riap::Simple server implementations
@@ -17,7 +17,7 @@ Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 =head1 VERSION
 
-This document describes version 0.17 of Perinci::Access::Simple::Server (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
+This document describes version 0.18 of Perinci::Access::Simple::Server (from Perl distribution Perinci-Access-Simple-Server), released on 2014-10-23.
 
 =head1 SEE ALSO
 
@@ -31,7 +31,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Ac
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Access-Simple-Server>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Access-Simple-Server>.
 
 =head1 BUGS
 
@@ -43,11 +43,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

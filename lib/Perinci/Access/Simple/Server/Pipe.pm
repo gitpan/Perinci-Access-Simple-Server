@@ -1,15 +1,17 @@
 package Perinci::Access::Simple::Server::Pipe;
 
+our $DATE = '2014-10-23'; # DATE
+our $VERSION = '0.18'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.17'; # VERSION
-
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
 use JSON;
+use Perinci::AccessUtil qw(insert_riap_stuffs_to_res decode_args_in_riap_req);
 
 use Moo;
 
@@ -23,7 +25,7 @@ has riap_client => (
         Perinci::Access::Schemeless->new();
     });
 
-my $json       = JSON->new->allow_nonref;
+my $json       = JSON->new->allow_nonref->canonical;
 my $cleanser   = Data::Clean::JSON->get_cleanser;
 my $cleanserfj = Data::Clean::FromJSON->get_cleanser;
 
@@ -43,6 +45,8 @@ sub send_response {
     my $self = shift;
     my $res = $self->res // [500, "BUG: Response not set"];
     $log->tracef("Sending response to stdout: %s", $res);
+    my $v = $self->req->{v} // 1.1;
+    insert_riap_stuffs_to_res($res, $v);
     $cleanser->clean_in_place($res);
     my $res_json = $json->encode($res);
     print "J", length($res_json), "\015\012", $res_json, "\015\012";
@@ -75,6 +79,7 @@ sub run {
         eval {
             $req = $json->decode($req_json);
             $cleanserfj->clean_in_place($req);
+            decode_args_in_riap_req($req);
         };
         my $e = $@;
         if ($e) {
@@ -112,7 +117,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-This document describes version 0.17 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-07-22.
+This document describes version 0.18 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-10-23.
 
 =head1 SYNOPSIS
 
@@ -187,7 +192,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Ac
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Access-Simple-Server>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Access-Simple-Server>.
 
 =head1 BUGS
 
@@ -199,11 +204,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
