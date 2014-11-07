@@ -45,7 +45,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Access-Simple-Server
   homepage: https://metacpan.org/release/Perinci-Access-Simple-Server
   repository: git://github.com/perlancar/perl-Perinci-Access-Simple-Server.git
-version: '0.18'
+version: '0.19'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
@@ -238,7 +238,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Rinci::Validate
       name: '@Author::PERLANCAR/Rinci::Validate'
-      version: '0.18'
+      version: '0.19'
     -
       class: Dist::Zilla::Plugin::SetScriptShebang
       name: '@Author::PERLANCAR/SetScriptShebang'

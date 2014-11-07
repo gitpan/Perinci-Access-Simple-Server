@@ -2,9 +2,9 @@ NAME
     Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 VERSION
-    This document describes version 0.18 of Perinci::Access::Simple::Server
+    This document describes version 0.19 of Perinci::Access::Simple::Server
     (from Perl distribution Perinci-Access-Simple-Server), released on
-    2014-10-23.
+    2014-11-07.
 
 SEE ALSO
     Perinci::Access::Simple::Server::Pipe

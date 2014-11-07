@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '0.18'; # VERSION
+our $VERSION = '0.19'; # VERSION
 
 use Data::Clean::FromJSON;
 use Data::Clean::JSON;
@@ -278,7 +278,7 @@ sub _main_loop {
 
                 eval {
                     $self->{_req} = $json->decode($self->{_req_json});
-                    $cleanserfj->clean_in_place($self->{_req});
+                    $cleanserfj->clone_and_clean($self->{_req});
                     decode_args_in_riap_req($self->{_req});
                 };
                 my $e = $@;
@@ -301,7 +301,7 @@ sub _main_loop {
               FINISH_REQ:
                 $self->_daemon->update_scoreboard({state => "W"});
                 insert_riap_stuffs_to_res($self->{_res}, $self->{_req}{v});
-                $cleanser->clean_in_place($self->{_res});
+                $self->{_res} = $cleanser->clone_and_clean($self->{_res});
                 eval { $self->{_res_json} = $json->encode($self->{_res}) };
                 $e = $@;
                 if ($e) {
@@ -502,7 +502,7 @@ Perinci::Access::Simple::Server::Socket - Implement Riap::Simple server over soc
 
 =head1 VERSION
 
-This document describes version 0.18 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-10-23.
+This document describes version 0.19 of Perinci::Access::Simple::Server::Socket (from Perl distribution Perinci-Access-Simple-Server), released on 2014-11-07.
 
 =head1 SYNOPSIS
 

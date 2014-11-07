@@ -1,7 +1,7 @@
 package Perinci::Access::Simple::Server::Pipe;
 
-our $DATE = '2014-10-23'; # DATE
-our $VERSION = '0.18'; # VERSION
+our $DATE = '2014-11-07'; # DATE
+our $VERSION = '0.19'; # VERSION
 
 use 5.010001;
 use strict;
@@ -47,7 +47,7 @@ sub send_response {
     $log->tracef("Sending response to stdout: %s", $res);
     my $v = $self->req->{v} // 1.1;
     insert_riap_stuffs_to_res($res, $v);
-    $cleanser->clean_in_place($res);
+    $res = $cleanser->clone_and_clean($res);
     my $res_json = $json->encode($res);
     print "J", length($res_json), "\015\012", $res_json, "\015\012";
 }
@@ -117,7 +117,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-This document describes version 0.18 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-10-23.
+This document describes version 0.19 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-11-07.
 
 =head1 SYNOPSIS
 
