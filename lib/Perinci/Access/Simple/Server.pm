@@ -1,6 +1,6 @@
 package Perinci::Access::Simple::Server;
 
-our $VERSION = '0.19'; # VERSION
+our $VERSION = '0.20'; # VERSION
 
 1;
 # ABSTRACT: Riap::Simple server implementations
@@ -17,7 +17,7 @@ Perinci::Access::Simple::Server - Riap::Simple server implementations
 
 =head1 VERSION
 
-This document describes version 0.19 of Perinci::Access::Simple::Server (from Perl distribution Perinci-Access-Simple-Server), released on 2014-11-07.
+This document describes version 0.20 of Perinci::Access::Simple::Server (from Perl distribution Perinci-Access-Simple-Server), released on 2014-12-11.
 
 =head1 SEE ALSO
 

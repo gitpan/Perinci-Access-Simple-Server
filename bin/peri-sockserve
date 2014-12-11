@@ -12,7 +12,7 @@ use Perinci::Access::Simple::Server::Socket;
 use Perinci::CmdLine::Any;
 use Perinci::Gen::ForModule qw(gen_meta_for_module);
 
-our $VERSION = '0.19'; # VERSION
+our $VERSION = '0.20'; # VERSION
 
 our %SPEC;
 
@@ -153,7 +153,7 @@ peri-sockserve - Serve Perl modules using the Riap::Simple protocol over sockets
 
 =head1 VERSION
 
-This document describes version 0.19 of peri-sockserve (from Perl distribution Perinci-Access-Simple-Server), released on 2014-11-07.
+This document describes version 0.20 of peri-sockserve (from Perl distribution Perinci-Access-Simple-Server), released on 2014-12-11.
 
 =head1 SYNOPSIS
 
@@ -175,6 +175,46 @@ This document describes version 0.19 of peri-sockserve (from Perl distribution P
 L<Riap::Simple>, L<Riap>, L<Rinci>
 
 L<Perinci::Access::Simple::Client>, L<Perinci::Access>
+
+=head1 COMPLETION
+
+This script has shell tab completion capability with support for several shells.
+
+=head2 bash
+
+To activate bash completion for this script, put:
+
+ complete -C peri-sockserve peri-sockserve
+
+in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
+
+You can also install L<App::BashCompletionProg> which makes it easy to add completion for Getopt::Long::Complete-based scripts. After you install the module and put C<. ~/.bash-complete-prog> (or C<. /etc/bash-complete-prog>), you can just run C<bash-completion-prog> and the C<complete> command will be added to your C<~/.bash-completion-prog>. Your next shell session will then recognize tab completion for the command.
+
+=head2 fish
+
+To activate fish completion for this script, execute:
+
+ begin; set -lx COMP_SHELL fish; set -lx COMP_MODE gen_command; peri-sockserve; end > $HOME/.config/fish/completions/peri-sockserve.fish
+
+Or if you want to install globally, you can instead write the generated script to C</etc/fish/completions/peri-sockserve.fish> or C</usr/share/fish/completions/peri-sockserve.fish>. The exact path might be different on your system. Please check your C<fish_complete_path> variable.
+
+=head2 tcsh
+
+To activate tcsh completion for this script, put:
+
+ complete peri-sockserve 'p/*/`peri-sockserve`/'
+
+in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
+
+=head2 zsh
+
+To activate zsh completion for this script, put:
+
+ _peri_sockserve() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_SHELL=zsh COMP_LINE="$cl" COMP_POINT="$cp" peri-sockserve`) }
+
+ compctl -K _peri_sockserve peri-sockserve
+
+in your zsh startup (e.g. C<~/.zshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
 =head1 HOMEPAGE
 

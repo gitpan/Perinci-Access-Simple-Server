@@ -1,7 +1,7 @@
 package Perinci::Access::Simple::Server::Pipe;
 
-our $DATE = '2014-11-07'; # DATE
-our $VERSION = '0.19'; # VERSION
+our $DATE = '2014-12-11'; # DATE
+our $VERSION = '0.20'; # VERSION
 
 use 5.010001;
 use strict;
@@ -117,7 +117,7 @@ Perinci::Access::Simple::Server::Pipe - (Base) class for creating Riap::Simple s
 
 =head1 VERSION
 
-This document describes version 0.19 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-11-07.
+This document describes version 0.20 of Perinci::Access::Simple::Server::Pipe (from Perl distribution Perinci-Access-Simple-Server), released on 2014-12-11.
 
 =head1 SYNOPSIS
 
@@ -146,10 +146,6 @@ requests will be read from STDIN, and response sent to STDOUT.
 By default, the L<handle()> method processes the Riap request using
 L<Perinci::Access::Schemeless>. You can customize this by overriding the method.
 The Riap request is in C<req>. Method should set C<res> to the Riap response.
-
-This module uses L<Log::Any> for logging.
-
-This module uses L<Moo> for object system.
 
 =head1 ATTRIBUTES
 
